@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dbt-version: ["1.7.*", "1.8.*", "1.9.*"]
+        dbt-version: ["1.8.*", "1.9.*"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
