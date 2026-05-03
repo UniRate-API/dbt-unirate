@@ -1,0 +1,5 @@
+as_of_date,base_currency,target_currency,rate
+2024-01-01,USD,EUR,0.95
+2024-06-01,USD,EUR,0.93
+2024-12-01,USD,EUR,0.91
+2025-06-01,USD,EUR,0.88

@@ -1,0 +1,29 @@
+name: 'unirate'
+version: '0.1.0'
+config-version: 2
+
+require-dbt-version: [">=1.6.0", "<2.0.0"]
+
+profile: 'unirate'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  unirate_base_currency: "USD"
+  unirate_target_currencies: []
+  unirate_pro_enabled: false
+  unirate_historical_start_date: ""
+  unirate_historical_end_date: ""
+  unirate_request_timeout: 30
+
+models:
+  unirate:
+    +materialized: table
+    +schema: unirate
+    unirate__historical_rates:
+      +enabled: "{{ var('unirate_pro_enabled', false) }}"

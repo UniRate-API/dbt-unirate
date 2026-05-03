@@ -1,0 +1,25 @@
+name: 'integration_tests'
+version: '1.0.0'
+config-version: 2
+
+profile: 'integration_tests'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+require-dbt-version: [">=1.6.0", "<2.0.0"]
+
+models:
+  unirate:
+    +enabled: false
+  integration_tests:
+    +materialized: table
+
+seeds:
+  integration_tests:
+    +quote_columns: false

@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: unirate__exchange_rates
+    description: |
+      Latest exchange rates fetched from the UniRateAPI `/api/rates` endpoint,
+      one row per (date, base, target). Re-running appends a new daily snapshot.
+    columns:
+      - name: as_of_date
+        description: Date the rates were fetched (UTC).
+        tests:
+          - not_null
+      - name: base_currency
+        description: ISO-4217 (or crypto ticker) code of the base currency. Uppercase.
+        tests:
+          - not_null
+      - name: target_currency
+        description: ISO-4217 (or crypto ticker) code of the target currency. Uppercase.
+        tests:
+          - not_null
+      - name: rate
+        description: How many units of `target_currency` 1 unit of `base_currency` buys.
+        tests:
+          - not_null
+
+  - name: unirate__historical_rates
+    description: |
+      Historical exchange rates fetched from the UniRateAPI `/api/historical/timeseries`
+      endpoint. Pro plan required — disabled by default (set `unirate_pro_enabled: true`).
+    columns:
+      - name: as_of_date
+        description: Historical date for the rate (YYYY-MM-DD).
+        tests:
+          - not_null
+      - name: base_currency
+        description: ISO-4217 (or crypto ticker) code of the base currency. Uppercase.
+        tests:
+          - not_null
+      - name: target_currency
+        description: ISO-4217 (or crypto ticker) code of the target currency. Uppercase.
+        tests:
+          - not_null
+      - name: rate
+        description: How many units of `target_currency` 1 unit of `base_currency` bought on that date.
+        tests:
+          - not_null

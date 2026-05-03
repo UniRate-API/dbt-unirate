@@ -1,0 +1,23 @@
+version: 2
+
+seeds:
+  - name: mock_latest_rates
+    config:
+      column_types:
+        as_of_date: date
+        base_currency: varchar
+        target_currency: varchar
+        rate: double
+  - name: mock_historical_rates
+    config:
+      column_types:
+        as_of_date: date
+        base_currency: varchar
+        target_currency: varchar
+        rate: double
+  - name: orders
+    config:
+      column_types:
+        order_id: integer
+        order_date: date
+        amount: double

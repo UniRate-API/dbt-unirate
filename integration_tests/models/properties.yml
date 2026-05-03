@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: test_get_rate
+    columns:
+      - name: rate
+        data_tests:
+          - dbt_utils_equal_value:
+              arguments:
+                expected_value: 0.92
+                tolerance: 0.0001
+
+  - name: test_convert_currency_latest
+    columns:
+      - name: amount_eur
+        data_tests:
+          - not_null
+    data_tests:
+      - row_amount_eur_matches:
+          arguments:
+            expected_rate: 0.92
+
+  - name: test_convert_currency_historical
+    columns:
+      - name: amount_eur
+        data_tests:
+          - not_null
+    data_tests:
+      - historical_amount_eur_matches: {}
+
+  - name: test_convert_currency_passthrough
+    columns:
+      - name: amount_usd
+        data_tests:
+          - not_null
+    data_tests:
+      - passthrough_amount_unchanged: {}
